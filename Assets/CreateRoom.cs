@@ -21,6 +21,7 @@ namespace RGame.Photon
 
         void Start()
         {
+            //‰Šú‰»mainCanvas‚ª‚ ‚Á‚½‚ç”ñ•\¦
             if(mainCanvas)
             {
                 mainCanvas.SetActive(false);

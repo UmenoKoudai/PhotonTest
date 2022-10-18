@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Photon.Realtime;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] int _moveSpeed;
     Rigidbody _rb;
@@ -17,15 +19,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 dir = Vector3.forward * v + Vector3.right * h;
-        dir = Camera.main.transform.TransformDirection(dir);
-        dir.y = 0;
-        if(dir != Vector3.zero)
+        if (photonView.IsMine)
         {
-            transform.right = dir;
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            Vector3 dir = Vector3.forward * v + Vector3.right * h;
+            dir = Camera.main.transform.TransformDirection(dir);
+            dir.y = 0;
+            if (dir != Vector3.zero)
+            {
+                transform.right = dir;
+            }
+            _rb.velocity = dir.normalized * _moveSpeed + _rb.velocity.y * Vector3.up;
         }
-        _rb.velocity = dir.normalized * _moveSpeed + _rb.velocity.y * Vector3.up;
     }
 }
