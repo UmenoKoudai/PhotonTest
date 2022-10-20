@@ -25,10 +25,14 @@ public class Create : MonoBehaviourPunCallbacks
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
-    public override void OnJoinedRoom()
+    //public override void OnJoinedRoom()
+    //{
+    //    // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
+    //    var position = new Vector3(Random.Range(-5, 5), 3,  Random.Range(-5, 5));
+    //    PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+    //}
+    public override void OnPlayerLeftRoom(Player newplayer)
     {
-        // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
-        var position = new Vector3(Random.Range(-5, 5), 3,  Random.Range(-5, 5));
-        PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        Debug.Log($"Player({newplayer.ActorNumber})がログインしました");
     }
 }
