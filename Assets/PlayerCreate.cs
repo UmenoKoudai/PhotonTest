@@ -11,7 +11,7 @@ public class PlayerCreate : MonoBehaviourPunCallbacks
 {
     void Start()
     {
-        var position = new Vector3(Random.Range(-5, 5), transform.position.y, Random.Range(-5, 5));
+        var position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
     }
 }
