@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/PhotonTest2D.unity
     guid: b1e4b857a086c264895a90868f2ba64d
-  - enabled: 0
-    path: Assets/TestGame.unity
-    guid: 8d464af9bc8e5504a9fb1c1da9009f9d
   - enabled: 1
     path: Assets/PhotonTitle.unity
     guid: 1106e2fcd48217e4e8bfec98a7e294d1
+  - enabled: 1
+    path: Assets/TestGame.unity
+    guid: 8d464af9bc8e5504a9fb1c1da9009f9d
   m_configObjects: {}

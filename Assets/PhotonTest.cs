@@ -13,6 +13,7 @@ public class PhotonTest : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _close;
     [SerializeField] InputField _roomName;
     [SerializeField] GameObject _Player;
+    int _maxPlayer = 2;
 
     void Start()
     {
@@ -46,5 +47,17 @@ public class PhotonTest : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log($"{cause}ÇÃóùóRÇ≈ÉçÉOÉCÉìÇ≈Ç´Ç‹ÇπÇÒÇ≈ÇµÇΩ");
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            if(PhotonNetwork.CurrentRoom.PlayerCount == _maxPlayer)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.LoadLevel("TestGame");
+            }
+        }
     }
 }
