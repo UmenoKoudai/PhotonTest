@@ -13,21 +13,25 @@ public class PhotonTest : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _close;
     [SerializeField] InputField _roomName;
     [SerializeField] GameObject _Player;
-    [SerializeField] GameObject _countDown;
+    [SerializeField] Text _countDown;
     [SerializeField] Text _inRoomPlayerCount;
-    Text _countDownText;
     int _maxPlayer = 2;
 
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        _countDownText = _countDown.GetComponent<Text>();
     }
 
     public void SetActive()
     {
         _open.SetActive(true);
+        _inRoomPlayerCount.gameObject.SetActive(true);
         _close.SetActive(false);
+    }
+
+    public void InRoom()
+    {
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public void CreateRoom()
@@ -44,8 +48,7 @@ public class PhotonTest : MonoBehaviourPunCallbacks
     {
         Debug.Log("ÉãÅ[ÉÄÇ…ì¸èÍÇµÇ‹ÇµÇΩ");
         _open.SetActive(false);
-        Vector3 position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
-        PhotonNetwork.Instantiate($"{_Player.name}", position, Quaternion.identity);
+        _inRoomPlayerCount.text = $"{PhotonNetwork.CurrentRoom.PlayerCount}/{_maxPlayer}";
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -55,27 +58,23 @@ public class PhotonTest : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        _inRoomPlayerCount.text = $"{PhotonNetwork.CurrentRoom.PlayerCount}/{_maxPlayer}";
-        //if (PhotonNetwork.CurrentRoom.PlayerCount == _maxPlayer)
-        //{
-        //    PhotonNetwork.CurrentRoom.IsOpen = false;
-        //    StartCoroutine(SceneMove());
-    
         if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == _maxPlayer)
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
-                StartCoroutine(SceneMove());
+                PhotonNetwork.IsMessageQueueRunning = false;
+                SceneManager.LoadSceneAsync("TestGame", LoadSceneMode.Single);
+                //StartCoroutine(SceneMove());
             }
         }
     }
 
-    IEnumerator SceneMove()
-    {
-        _countDown.SetActive(true);
-        _countDownText.text = $"{(5 - Time.deltaTime).ToString("d0")}";
-        yield return new WaitForSeconds(5);
-        PhotonNetwork.LoadLevel("TestGame");
-    }
+    //IEnumerator SceneMove()
+    //{
+    //    _countDown.gameObject.SetActive(true);
+    //    _countDown.text = $"{(5 - Time.deltaTime).ToString("d0")}";
+    //    yield return new WaitForSeconds(5);
+    //    SceneManager.LoadSceneAsync("TestGame", LoadSceneMode.Single);
+    //}
 }
