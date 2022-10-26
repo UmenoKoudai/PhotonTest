@@ -751,7 +751,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0/2
+  m_Text: 0/3
 --- !u!222 &642409418
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -998,7 +998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938766655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1174,9 +1174,16 @@ MonoBehaviour:
   _open: {fileID: 532605495}
   _close: {fileID: 970727232}
   _roomName: {fileID: 1562564814}
-  _Player: {fileID: 4704016783361367052, guid: 7ef309ee18cb9fa4c9987acf04afad7c, type: 3}
-  _countDown: {fileID: 2052978325}
+  _player:
+  - {fileID: 6918727677726704450, guid: 58302ef4fffd5cc42b307019421e4440, type: 3}
+  - {fileID: 6726434362835850159, guid: 78961636947b6bd43994a878ad0bcfb6, type: 3}
+  - {fileID: 6726434362835850159, guid: fd5fe5c8f2e9e6b40a83e303c6c41156, type: 3}
+  - {fileID: 6726434362835850159, guid: ad0a7b097c4a30541bdf259a6f37f598, type: 3}
+  _roomStage: {fileID: 9097167244589104346, guid: d32205c0ff9822140a274a8e5c61b378, type: 3}
+  _battleStage: {fileID: 3124435043323613756, guid: 862c312dd7a852e4996a3632396f6d12, type: 3}
+  _countDown: {fileID: 2052978327}
   _inRoomPlayerCount: {fileID: 642409417}
+  _maxPlayer: 1
 --- !u!4 &1074389059
 Transform:
   m_ObjectHideFlags: 0
